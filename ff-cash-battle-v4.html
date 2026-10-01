@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FF Cash Battle</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#071a33;--card:#132a4a;--card2:#1b3a63;--line:#1f4d75;--cy:#22d3ee;--tx:#f1f5f9;--mu:#8fa8c4;--g:#22c55e;--r:#ef4444;--pri:#6d5dfc;--top:linear-gradient(180deg,#0a4a7c,#062a4d)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,sans-serif;font-size:14px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,input:focus-visible{outline:3px solid var(--cy);outline-offset:2px}
+h1,h2,h3,.disp{font-family:Rajdhani,Inter,sans-serif;font-weight:700}
+header{position:fixed;top:0;left:0;right:0;z-index:30;background:var(--top);border-radius:0 0 22px 22px;padding:calc(10px + env(safe-area-inset-top)) 16px 12px;display:flex;align-items:center;gap:12px;min-height:calc(58px + env(safe-area-inset-top))}
+header h2{flex:1;text-align:center;font-size:1.25rem;margin-right:36px}
+.ava{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#6d5dfc);display:grid;place-items:center;font-weight:800;font-size:1.1rem}
+.hn{flex:1;font-size:1.25rem}
+.coin{border:1px solid #ffffff55;border-radius:20px;padding:5px 12px;font-weight:700;display:flex;gap:6px;align-items:center}
+.coin b{color:#fbbf24}
+.ib{width:36px;height:36px;border-radius:50%;background:#ffffff1f;display:grid;place-items:center;position:relative}
+.ib.dot::after{content:'';position:absolute;top:6px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--r)}
+svg.i{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+main{padding:calc(76px + env(safe-area-inset-top)) 14px calc(96px + env(safe-area-inset-bottom))}
+.ann{display:flex;align-items:center;gap:10px;background:#0f2540;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:12px;overflow:hidden}
+.ann div{white-space:nowrap;animation:mq 18s linear infinite;color:var(--mu)}
+.ann b{color:var(--tx)}
+@keyframes mq{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.bn{border-radius:14px;overflow:hidden;border:1px solid var(--cy);margin-bottom:6px}
+.bt{display:flex;transition:transform .5s}
+.sl{min-width:100%;height:150px;padding:18px;display:flex;flex-direction:column;justify-content:center}
+.sl h3{font-size:1.9rem;line-height:1}.sl p{margin-top:6px;opacity:.9}
+.dots{display:flex;justify-content:center;gap:6px;margin-bottom:14px}
+.dots i{width:7px;height:7px;border-radius:50%;background:#ffffff44}.dots i.on{background:var(--cy);width:18px;border-radius:6px}
+.sec{font-size:1.15rem;margin:8px 2px 10px;text-align:center}.sec.l{text-align:left}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 6px;display:flex;flex-direction:column;align-items:center;gap:8px;font-weight:600}
+.tile span.ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:1.4rem}
+.tile em{font-style:normal;font-size:.7rem;color:var(--mu)}
+.games{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gm{position:relative;height:104px;border-radius:12px;border:1px solid var(--cy);overflow:hidden;text-align:left;padding:10px}
+.gm h3{font-size:1.25rem;font-style:italic;line-height:1.05;max-width:80%;text-shadow:0 2px 4px #0008}
+.gm .ic{position:absolute;right:8px;top:6px;font-size:2.2rem;opacity:.9}
+.gm .ft{position:absolute;left:0;right:0;bottom:0;background:#000a;padding:5px 10px;display:flex;justify-content:space-between;font-weight:700;font-size:.78rem}
+.gm .ft b{color:var(--g)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.mh{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.mh h3{font-size:1.15rem}.mh small{color:var(--mu)}
+.chip{font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:20px;background:#ffffff1a}
+.chip.live{background:#14532d;color:#86efac}.chip.done{background:#3f3f46;color:#d4d4d8}.chip.pk{background:#78350f;color:#fcd34d}
+.st{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;background:#0b2140;border-radius:10px;padding:10px 0;margin-bottom:10px}
+.st b{display:block;font-size:1.05rem}.st span{font-size:.68rem;color:var(--mu)}
+.bar{height:7px;background:#0b2140;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--cy)}
+.row{display:flex;justify-content:space-between;font-size:.78rem;color:var(--mu);margin:6px 0 10px}
+.btn{width:100%;padding:13px;border-radius:10px;font-weight:700;background:var(--g);color:#052e16;font-size:.95rem}
+.btn.r{background:var(--r);color:#fff}.btn.p{background:var(--pri);color:#fff}.btn:disabled{background:#334155;color:#94a3b8;cursor:not-allowed}
+.cred{display:flex;gap:8px;margin-top:8px}.cred div{flex:1;background:#0b2140;border:1px dashed var(--line);border-radius:8px;padding:8px;text-align:center}
+.cred small{display:block;color:var(--mu);font-size:.65rem}.cred b{font-family:monospace;font-size:1rem}
+.seg{display:flex;background:var(--card);border-radius:12px;padding:4px;margin-bottom:14px}
+.seg button{flex:1;padding:10px;border-radius:9px;font-weight:600;color:var(--mu)}.seg .on{background:var(--pri);color:#fff}
+.wt{text-align:center;padding:14px 0 6px}.wt h1{font-size:2rem}.wt hr{width:70px;border:0;height:3px;background:var(--pri);margin:8px auto 14px;border-radius:3px}
+.wsub{display:flex;justify-content:space-around;color:#4ade80;margin-bottom:16px;font-weight:600}
+.tx{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px}
+.tx small{color:var(--mu);display:block}
+.lst{background:#fff;color:#0f172a;border-radius:12px;padding:15px;margin-bottom:10px;display:flex;align-items:center;gap:14px;width:100%;text-align:left;font-weight:500}
+.lst span{flex:1}.lst svg{color:#2563eb}
+.me{text-align:center;color:var(--cy);font-size:1.6rem;margin:8px 0 14px}
+.sts{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;color:#0f172a;border-radius:12px;padding:16px 0;margin-bottom:14px;text-align:center}
+.sts b{display:block;font-size:1.6rem;color:#2563eb}.sts span{font-size:.75rem;color:#64748b}
+.field{width:100%;padding:14px;border-radius:10px;border:2px solid var(--line);background:#0b2140;color:var(--tx);font:inherit;margin-bottom:12px}
+.field:focus{border-color:var(--cy)}label{display:block;font-size:.8rem;color:var(--mu);margin-bottom:6px}
+.lb{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:12px;margin-bottom:8px}
+.lb .rk{width:30px;font-weight:800;font-size:1.1rem;color:#fbbf24}.lb .n{flex:1}.lb b{color:var(--g)}
+.emp{text-align:center;color:var(--mu);padding:40px 20px}
+.refer{margin:calc(-76px - env(safe-area-inset-top)) -14px 0;padding:calc(96px + env(safe-area-inset-top)) 22px 44px;background:#4a00b8;border-radius:0 0 40px 40px;text-align:center}
+.refer h1{font-size:2rem;line-height:1.15}
+.gift{font-size:5.5rem;line-height:1;margin:14px 0 22px}
+.rbox{border:2px dashed #fff;border-radius:10px;background:#9400ff;padding:10px 12px 14px}
+.rbox small{display:block;color:#f3e8ff;margin-bottom:8px}
+.rcode{background:#d4d4d8;color:#0f172a;border-radius:12px;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:monospace;font-size:1.15rem;text-align:left;word-break:break-all}
+.rcode button{color:#0f172a;flex-shrink:0}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:30;background:var(--top);display:flex;padding-bottom:env(safe-area-inset-bottom);border-radius:18px 18px 0 0}
+nav button{flex:1;padding:10px 0 8px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;border-bottom:3px solid transparent;opacity:.75}
+nav button.on{opacity:1;border-color:#fff}
+#toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translate(-50%,16px);background:#fff;color:#0f172a;padding:11px 18px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:60;max-width:88%;text-align:center;font-weight:600}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header id="hd"></header>
+<main id="scr"></main>
+<nav id="nav"></nav>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* PASTE YOUR FIREBASE CONFIG HERE (Firebase console > Project settings > Your apps > Web app).
+   While it still says PASTE, the app runs in demo mode without login. */
+window.FBCFG={apiKey:"PASTE_API_KEY",authDomain:"PASTE_PROJECT.firebaseapp.com",projectId:"PASTE_PROJECT_ID",appId:"PASTE_APP_ID"};
+</script>
+<script>
+/* ===== DATA LAYER: demo mode (localStorage). For live use, swap db.* for Firebase Auth/Firestore.
+   Money (join, deposit, withdraw, prizes) MUST be handled on your server / Cloud Functions, never here. ===== */
+const GAMES=[
+ {id:'solo',n:'Solo Survival',s:'BR Survival',c:['#f97316','#7f1d1d'],i:'🔥'},
+ {id:'perkill',n:'BR Per Kill',s:'BR Per Kill',c:['#ef4444','#3b0d0d'],i:'🎯',pk:5},
+ {id:'cs',n:'Clash Squad',s:'Clash Squad',c:['#2563eb','#0b1b3d'],i:'⚔️'},
+ {id:'lw',n:'Lone Wolf',s:'Lone Wolf',c:['#0ea5e9','#0c2a4a'],i:'🐺'},
+ {id:'cshs',n:'CS Headshot',s:'CS Headshot',c:['#16a34a','#052e16'],i:'💀'},
+ {id:'lwhs',n:'LW Headshot',s:'LW Headshot',c:['#d97706','#3b2404'],i:'🏹'}
+];
+const TPL=[[10,150,20,-90],[20,300,20,-10],[20,300,20,45],[40,700,20,120],[50,900,12,300]];
+const LIVE=!/PASTE/.test(window.FBCFG.apiKey);const FB=window.FB={live:LIVE,user:null,loading:LIVE};let authMode='login',KEY='ffcb_v3';
+const db={
+ load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s)return s}catch(e){}
+  return{t0:Date.now(),dep:0,win:0,name:'',uid:'',joined:{},filled:{},kills:0,earn:0,tx:[]}},
+ save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+};
+let S=db.load(),V={v:'home'},H=[],ti='mine-up',bi=0;
+const DEMO=GAMES.flatMap((g,gi)=>TPL.map((t,k)=>({id:g.id+'-'+k,g:g.id,gi,title:g.n+' #'+(3100+gi*10+k),fee:t[0],prize:t[1],slots:t[2],min:t[3],base:(k*7+gi*3)%(t[2]-2)+1})));
+let MATCHES=LIVE?[]:DEMO;
+const $=id=>document.getElementById(id),total=()=>S.dep+S.win,R=n=>'₹'+n.toLocaleString('en-IN');
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const at=m=>m.at||S.t0+m.min*6e4;const filled=m=>m.base+(S.joined[m.id]?1:0), status=m=>{const s=at(m),n=Date.now();return n>s+18e5?'done':n>=s?'live':'up'};
+const when=m=>{const d=at(m)-Date.now();if(d<=0)return status(m)==='live'?'Live now':'Ended';const h=Math.floor(d/36e5),mi=Math.floor(d%36e5/6e4);return 'Starts in '+(h?h+'h ':'')+mi+'m'};
+const ic=p=>`<svg class="i" viewBox="0 0 24 24">${p}</svg>`;
+const I={back:ic('<path d="M15 5l-7 7 7 7"/>'),bell:ic('<path d="M6 8a6 6 0 0112 0c0 7 3 8 3 8H3s3-1 3-8M10 20a2 2 0 004 0"/>'),user:ic('<circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/>'),wal:ic('<rect x="3" y="6" width="18" height="14" rx="3"/><path d="M16 13h2M3 10h18"/>'),chart:ic('<path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/>'),cup:ic('<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0zM7 6H3v2a4 4 0 004 4M17 6h4v2a4 4 0 01-4 4"/>'),help:ic('<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.7-2.5 2-2.5 3.5M12 17h.01"/>'),lock:ic('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/>'),off:ic('<path d="M12 3v9M6.3 6.3a8 8 0 1011.4 0"/>'),gift:ic('<rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M8 8a2.5 2.5 0 110-5c3 0 4 5 4 5s1-5 4-5a2.5 2.5 0 110 5"/>'),home:ic('<path d="M3 11l9-8 9 8v10H3z"/>'),menu:ic('<circle cx="12" cy="12" r="9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/>')};
+
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),2400)}
+function go(v,a){H.push(V);V={v,a};draw();scrollTo(0,0)}
+function back(){V=H.pop()||{v:'home'};draw()}
+function tabTo(v){H=[];V={v};draw();scrollTo(0,0)}
+function pay(fee){if(total()<fee)return false;const d=Math.min(S.dep,fee);S.dep-=d;S.win-=fee-d;return true}
+function log(k,t,a){S.tx.push({k,t,a,d:Date.now(),nb:total()})}
+
+function matchCard(m){const g=GAMES.find(x=>x.id===m.g),st=status(m),j=S.joined[m.id],f=filled(m),full=f>=m.slots,near=st==='up'&&at(m)-Date.now()<9e5||st==='live';
+ return `<div class="card"><div class="mh"><div><h3>${esc(m.title)}</h3><small>${g.s} · Bermuda</small></div><span class="chip ${st==='live'?'live':st==='done'?'done':''}">${st==='live'?'LIVE':st==='done'?'ENDED':'UPCOMING'}</span></div>
+ <div class="st"><div><b>${R(m.prize)}</b><span>Prize pool</span></div><div><b>${R(m.fee)}</b><span>Entry fee</span></div><div><b>${g.pk?R(g.pk):'—'}</b><span>Per kill</span></div></div>
+ <div class="bar"><i style="width:${f/m.slots*100}%"></i></div><div class="row"><span>${f}/${m.slots} joined</span><span>${when(m)}</span></div>
+ ${j&&near?`<div class="cred"><div><small>Room ID</small><b>482915</b></div><div><small>Password</small><b>ff77</b></div></div>`:''}
+ ${j&&!near&&st!=='done'?'<p class="row" style="margin:0 0 8px">Room ID and password appear 15 minutes before start.</p>':''}
+ <button class="btn ${j?'':'p'}" ${j||full||st!=='up'?'disabled':''} data-join="${m.id}">${j?'Joined':st!=='up'?'Closed':full?'Match full':'Join for '+R(m.fee)}</button></div>`}
+
+const views={
+ auth(){const reg=authMode==='reg';return `<div class="card" style="margin-top:20px"><h3 style="font-size:1.4rem;margin-bottom:14px">${reg?'Create account':'Login'}</h3>${reg?'<label for="an">Free Fire game name</label><input class="field" id="an" maxlength="24" autocomplete="nickname">':''}<label for="ae">Email</label><input class="field" id="ae" type="email" autocomplete="email"><label for="ap">Password (6+ characters)</label><input class="field" id="ap" type="password" autocomplete="${reg?'new-password':'current-password'}"><button class="btn p" data-act="authgo">${reg?'Register':'Login'}</button><p class="row" style="justify-content:center;margin:14px 0 0"><button data-act="authmode" style="color:var(--cy);font-weight:600">${reg?'Already have an account? Login':'New here? Create account'}</button></p></div>`},
+ home(){const sl=[['#6d5dfc','#0b1b3d','Weekly tournament','Top 3 win ₹500 · ₹300 · ₹200'],['#0ea5e9','#062a4d','Refer & earn','Invite a friend, get a bonus'],['#ef4444','#3b0d0d','Per-kill matches','Every kill pays cash']];
+  const cnt=g=>MATCHES.filter(m=>m.g===g&&status(m)==='up'&&filled(m)<m.slots).length;
+  const nm=k=>MATCHES.filter(m=>S.joined[m.id]&&status(m)===k).length;
+  return `<div class="ann"><b>📍 RULES</b><div>Use your exact Free Fire in-game name. Wrong name = no prize. Read all rules before you join.</div></div>
+  <div class="bn"><div class="bt" id="bt">${sl.map(s=>`<div class="sl" style="background:linear-gradient(135deg,${s[0]},${s[1]})"><h3 class="disp">${s[2]}</h3><p>${s[3]}</p></div>`).join('')}</div></div>
+  <div class="dots" id="dots">${sl.map((_,i)=>`<i class="${i===bi?'on':''}"></i>`).join('')}</div>
+  <h2 class="sec">My Matches</h2>
+  <div class="tiles">${[['live','Ongoing','#22c55e33','🔄'],['up','Upcoming','#22d3ee33','📅'],['done','Completed','#22c55e33','✅']].map(t=>`<button class="tile" data-mine="${t[0]}"><span class="ic" style="background:${t[2]}">${t[3]}</span>${t[1]}<em>${nm(t[0])} joined</em></button>`).join('')}</div>
+  <h2 class="sec l">Esports Games</h2>
+  <div class="games">${GAMES.map(g=>`<button class="gm" data-list="${g.id}" style="background:linear-gradient(135deg,${g.c[0]},${g.c[1]})"><h3>${g.n}</h3><span class="ic">${g.i}</span><div class="ft"><span>${g.s.toUpperCase()}</span><b>● ${cnt(g.id)}</b></div></button>`).join('')}</div>`},
+ list(){const g=GAMES.find(x=>x.id===V.a);return MATCHES.filter(m=>m.g===g.id&&status(m)!=='done').map(matchCard).join('')||'<p class="emp">No open matches right now.</p>'},
+ mine(){const k=V.a||'up',lab={live:'Ongoing',up:'Upcoming',done:'Completed'},l=MATCHES.filter(m=>S.joined[m.id]&&status(m)===k);
+  return `<div class="seg">${['live','up','done'].map(x=>`<button class="${x===k?'on':''}" data-mine="${x}" data-rep="1">${lab[x]}</button>`).join('')}</div>`+(l.map(matchCard).join('')||`<p class="emp">No ${lab[k].toLowerCase()} matches. Join one from Home.</p>`)},
+ wallet(){return `<div class="wt"><h1>Total Balance = ${total()}</h1><hr></div><div class="wsub"><span>Deposit Balance: ${S.dep}</span><span>Win Balance: ${S.win}</span></div>
+  <button class="btn" data-act="add" style="margin-bottom:10px">Buy More</button><button class="btn r" data-act="wd" style="margin-bottom:22px">Withdraw</button>
+  <h2 class="sec">Wallet history</h2>`+(S.tx.slice().reverse().map(t=>`<div class="tx"><div><b>${t.k}</b><small>${new Date(t.d).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'})}</small></div><div style="flex:1;text-align:center;color:var(--mu)">${esc(t.t)}</div><div style="text-align:right"><b style="color:${t.a<0?'var(--r)':'var(--g)'}">${t.a<0?'-':'+'}${R(Math.abs(t.a))}</b><small>Bal: ${t.nb}</small></div></div>`).join('')||'<p class="emp">No transactions yet.</p>')},
+ lb(){const p=[['ShadowKing',4820],['NightRaven',3910],['HeadshotPro',3275],['ClutchGod',2640],['ViperX',1980]];if(S.name)p.push([S.name,S.earn]);p.sort((a,b)=>b[1]-a[1]);
+  return `<h2 class="sec">Top earners</h2>`+p.map((x,i)=>`<div class="lb"><span class="rk">${i+1}</span><span class="n">${esc(x[0])}${x[0]===S.name?' (you)':''}</span><b>${R(x[1])}</b></div>`).join('')},
+ earn(){const code=S.name.trim().replace(/\s+/g,'_');
+  return `<div class="refer"><h1>Refer your friend<br>and Earn</h1><div class="gift">🎁</div><div class="rbox"><small>Your referral code</small><div class="rcode"><span>${code?esc(code):'Add your name in profile'}</span><button data-act="copy" data-code="${esc(code)}" aria-label="Copy code">${ic('<rect x="9" y="9" width="11" height="11" rx="3"/><path d="M5 15V7a3 3 0 013-3h8"/>')}</button></div></div></div>`},
+ menu(){const played=MATCHES.filter(m=>S.joined[m.id]).length;
+  const it=(ico,t,a)=>`<button class="lst" ${a}>${ico}<span>${t}</span>${ic('<path d="M9 6l6 6-6 6"/>')}</button>`;
+  return `<div class="me">${esc(S.name||'Guest player')}</div><div class="sts"><div><b>${played}</b><span>Matches Played</span></div><div><b>${S.kills}</b><span>Total Kills</span></div><div><b>${S.earn}</b><span>Total Earning</span></div></div>`+
+  it(I.user,'My Profile','data-go="profile"')+it(I.wal,'My Wallet','data-go="wallet"')+it(I.cup,'Top Players','data-go="lb"')+it(I.bell,'Notifications','data-go="notif"')+(FB.admin?it(I.cup,'Admin: add demo matches','data-act="seed"'):'')+it(I.help,'FAQ','data-go="faq"')+it(I.off,FB.live?'Logout':'Reset demo data',FB.live?'data-act="logout"':'data-act="reset"')},
+ profile(){return `<label for="pn">Free Fire game name (not user name)</label><input class="field" id="pn" maxlength="24" value="${esc(S.name)}"><label for="pu">Free Fire UID</label><input class="field" id="pu" inputmode="numeric" maxlength="12" value="${esc(S.uid)}"><button class="btn p" data-act="save">Save profile</button>`},
+ notif(){return [['Welcome!','Add your game name and UID, then join your first match.'],['Rules','Room details are shared 15 minutes before each match.']].map(n=>`<div class="card"><h3>${n[0]}</h3><p class="row" style="margin:6px 0 0">${n[1]}</p></div>`).join('')},
+ faq(){return [['How do I join?','Set up your profile, open a game and tap Join.'],['When do I get room details?','15 minutes before the match starts, inside My Matches.'],['How do withdrawals work?','Only Win Balance can be withdrawn. Minimum ₹50.']].map(n=>`<div class="card"><h3>${n[0]}</h3><p class="row" style="margin:6px 0 0">${n[1]}</p></div>`).join('')}
+};
+const TITLES={list:()=>GAMES.find(g=>g.id===V.a).n,mine:()=>'My Matches',wallet:'Wallet',lb:'Leaderboard',earn:'Refer & Earn',menu:'Menu',profile:'My Profile',notif:'Notifications',faq:'FAQ'};
+function draw(){if(FB.live&&(FB.loading||!FB.user)){$('nav').innerHTML='';if(FB.loading){$('hd').innerHTML='';$('scr').innerHTML='<p class="emp">Loading…</p>'}else{$('hd').innerHTML='<h2 style="margin:0">FF Cash Battle</h2>';$('scr').innerHTML=views.auth()}return}
+ const home=V.v==='home',t=TITLES[V.v],top=['home','lb','earn','menu'].includes(V.v);
+ $('hd').innerHTML=home?`<div class="ava">${esc((S.name||'G')[0].toUpperCase())}</div><div class="hn disp">${esc(S.name||'Guest')}</div><button class="coin" data-go="wallet" aria-label="Wallet"><b>₹</b>${total()}</button><button class="ib dot" data-go="notif" aria-label="Notifications">${I.bell}</button>`
+  :`${top?'<span style="width:36px"></span>':`<button class="ib" data-back aria-label="Back">${I.back}</button>`}<h2>${typeof t==='function'?t():t}</h2>`;
+ $('scr').innerHTML=views[V.v]();
+ const cur=['home','lb','earn','menu'].includes(V.v)?V.v:(V.v==='wallet'||V.v==='profile'||V.v==='faq'||V.v==='notif'?'menu':'home');
+ $('nav').innerHTML=[['earn','Earn',I.gift],['lb','Leaderboard',I.cup],['home','Home',I.home],['menu','Menu',I.menu]].map(n=>`<button data-tab="${n[0]}" class="${n[0]===cur?'on':''}">${n[2]}${n[1]}</button>`).join('')}
+
+function join(id){const m=MATCHES.find(x=>x.id===id);
+ if(!S.name||!/^\d{6,12}$/.test(S.uid)){toast('Add your game name and UID first');return go('profile')}
+ if(!pay(m.fee)){toast('Not enough balance. Tap Buy More');return go('wallet')}
+ S.joined[id]=1;log('debit','Joined '+m.title,-m.fee);db.save();draw();toast('Joined '+m.title)}
+function ask(q){const v=parseInt(prompt(q),10);return v>0?v:0}
+
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+ if('back'in d)back();
+ else if(d.tab)tabTo(d.tab);
+ else if(d.go)go(d.go);
+ else if(d.list)go('list',d.list);
+ else if(d.mine){if(d.rep){V.a=d.mine;draw()}else go('mine',d.mine)}
+ else if(d.join)join(d.join);
+ else if(d.act==='add'){const v=ask('Amount to add (₹) – demo only');if(v){S.dep+=v;log('credit','Deposit (demo)',v);db.save();draw();toast('Balance updated')}}
+ else if(d.act==='wd'){const v=ask('Amount to withdraw (₹, min 50)');if(!v)return;if(v<50)return toast('Minimum withdrawal is ₹50');if(v>S.win)return toast('Only Win Balance can be withdrawn');S.win-=v;log('debit','Withdraw request (demo)',-v);db.save();draw();toast('Withdraw request sent')}
+ else if(d.act==='copy'){if(!d.code)return toast('Add your name in profile first');(navigator.clipboard?navigator.clipboard.writeText(d.code):Promise.reject()).then(()=>toast('Code copied')).catch(()=>toast('Copy failed. Select and copy the code manually'))}
+ else if(d.act==='save'){const n=$('pn').value.trim(),u=$('pu').value.trim();if(!n)return toast('Enter your game name');if(!/^\d{6,12}$/.test(u))return toast('UID should be 6 to 12 digits');S.name=n;S.uid=u;db.save();if(FB.live)FB.saveProfile(n,u).catch(()=>toast('Could not save online'));toast('Profile saved');back()}
+ else if(d.act==='seed'){FB.seed(DEMO.map(m=>({...m,at:Date.now()+(Math.abs(m.min)+30)*6e4}))).then(()=>{toast('Demo matches added');loadM()}).catch(()=>toast('Failed. Check rules and your admins document'))}
+ else if(d.act==='authmode'){authMode=authMode==='login'?'reg':'login';draw()}
+ else if(d.act==='authgo')doAuth();
+ else if(d.act==='logout')FB.logout();
+ else if(d.act==='reset'){if(confirm('Reset all demo data?')){localStorage.removeItem(KEY);S=db.load();tabTo('home')}}
+});
+setInterval(()=>{const t=$('bt');if(!t)return;bi=(bi+1)%3;t.style.transform=`translateX(-${bi*100}%)`;[...$('dots').children].forEach((x,i)=>x.classList.toggle('on',i===bi))},4000);
+async function loadM(){try{const l=await FB.loadMatches();MATCHES=l.map(d=>({id:d.id,g:d.game,gi:Math.max(0,GAMES.findIndex(g=>g.id===d.game)),title:d.title,fee:d.fee,prize:d.prize,slots:d.slots,base:d.joined||0,at:d.startAt}));draw()}catch(e){toast('Could not load matches')}}
+async function doAuth(){const e=$('ae').value.trim(),p=$('ap').value,n=authMode==='reg'?$('an').value.trim():'';
+ if(!e||p.length<6)return toast('Enter email and a password of 6+ characters');
+ if(authMode==='reg'&&!n)return toast('Enter your game name');
+ try{await(authMode==='reg'?FB.register(e,p,n):FB.login(e,p))}catch(x){const c=x.code||'';toast(c.includes('email-already')?'Email already registered':/invalid|wrong|user-not/.test(c)?'Wrong email or password':c.includes('weak')?'Password too weak':'Login failed. Check your Firebase config and internet')}}
+window.onUser=pr=>{FB.loading=false;KEY='ffcb_v3_'+(FB.user?FB.user.uid:'');S=db.load();if(FB.user&&pr){S.name=pr.name||S.name;S.uid=pr.ffUid||S.uid}H=[];V={v:'home'};draw();if(FB.live&&FB.user)loadM()};
+setTimeout(()=>{if(FB.loading){FB.loading=false;draw()}},8000);
+draw();
+</script>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,serverTimestamp,collection,getDocs,query,orderBy,writeBatch,Timestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const FB=window.FB;
+if(FB.live){
+ const app=initializeApp(window.FBCFG),auth=getAuth(app),fs=getFirestore(app),ref=u=>doc(fs,'users',u.uid);
+ FB.login=(e,p)=>signInWithEmailAndPassword(auth,e,p);
+ FB.register=async(e,p,n)=>{const c=await createUserWithEmailAndPassword(auth,e,p);await setDoc(ref(c.user),{name:n,ffUid:'',email:e,createdAt:serverTimestamp()});window.onUser({name:n,ffUid:''})};
+ FB.logout=()=>signOut(auth);
+ FB.loadMatches=async()=>(await getDocs(query(collection(fs,'matches'),orderBy('startAt')))).docs.map(d=>{const x=d.data();return{...x,id:d.id,startAt:x.startAt.toMillis()}});
+ FB.seed=async l=>{const b=writeBatch(fs);l.forEach(m=>b.set(doc(fs,'matches',m.id),{game:m.g,title:m.title,fee:m.fee,prize:m.prize,slots:m.slots,joined:m.base,startAt:Timestamp.fromMillis(m.at)}));await b.commit()};
+ FB.isAdmin=async u=>{try{return(await getDoc(doc(fs,'admins',u.uid))).exists()}catch(e){return false}};
+ FB.saveProfile=(n,u)=>setDoc(ref(FB.user),{name:n,ffUid:u},{merge:true});
+ onAuthStateChanged(auth,async u=>{FB.user=u;FB.admin=false;let pr=null;if(u){try{const s=await getDoc(ref(u));pr=s.exists()?s.data():null}catch(e){}FB.admin=await FB.isAdmin(u)}window.onUser(pr)});
+}
+</script>
+</body>
+</html>
